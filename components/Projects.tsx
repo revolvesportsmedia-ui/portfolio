@@ -1,3 +1,5 @@
+"use client";
+
 import { useRef, useState, type MouseEvent, type ReactNode } from "react";
 import { projects } from "@/lib/data";
 import { ScrollReveal } from "@/components/ui/ScrollReveal";

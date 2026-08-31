@@ -1,0 +1,114 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    @apply font-sans;
+    background-color: theme("colors.surface.DEFAULT");
+    color: theme("colors.ink.DEFAULT");
+  }
+
+  ::selection {
+    background-color: color-mix(in srgb, theme("colors.accent.DEFAULT") 15%, transparent);
+    color: theme("colors.ink.DEFAULT");
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+@layer components {
+  .page-container {
+    @apply max-w-6xl mx-auto px-5 sm:px-6 lg:px-8;
+  }
+
+  .page-container-wide {
+    @apply max-w-7xl mx-auto px-5 sm:px-6 lg:px-8;
+  }
+
+  .section-label {
+    @apply text-[11px] font-semibold uppercase tracking-[0.14em];
+    color: theme("colors.ink.muted");
+  }
+
+  .section-heading {
+    @apply text-[28px] sm:text-[32px] font-semibold tracking-tight leading-[1.15];
+    color: theme("colors.ink.DEFAULT");
+  }
+
+  .body-text {
+    @apply text-[16px] sm:text-[17px] leading-relaxed;
+    color: theme("colors.ink.muted");
+  }
+
+  .card {
+    @apply rounded-lg shadow-subtle;
+    background-color: theme("colors.surface.elevated");
+    border: 1px solid theme("colors.divider.DEFAULT");
+  }
+
+  .nav-blur {
+    background: rgba(245, 245, 242, 0.78);
+    backdrop-filter: saturate(180%) blur(20px);
+    -webkit-backdrop-filter: saturate(180%) blur(20px);
+  }
+
+  .nav-blur-scrolled {
+    background: rgba(245, 245, 242, 0.92);
+    backdrop-filter: saturate(180%) blur(24px);
+    -webkit-backdrop-filter: saturate(180%) blur(24px);
+  }
+
+  .tag {
+    @apply inline-flex items-center px-2.5 py-1 rounded-md text-[12px] font-medium;
+    color: theme("colors.ink.muted");
+    background-color: theme("colors.surface.DEFAULT");
+    border: 1px solid theme("colors.divider.DEFAULT");
+  }
+
+  .link-accent {
+    color: theme("colors.accent.DEFAULT");
+    @apply transition-colors duration-200 ease-smooth;
+
+    &:hover {
+      color: theme("colors.ink.DEFAULT");
+    }
+  }
+
+  .hero-grid {
+    background-image:
+      linear-gradient(to right, rgba(220, 220, 220, 0.35) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(220, 220, 220, 0.35) 1px, transparent 1px);
+    background-size: 64px 64px;
+    mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, black 20%, transparent 75%);
+    -webkit-mask-image: radial-gradient(
+      ellipse 70% 60% at 50% 40%,
+      black 20%,
+      transparent 75%
+    );
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}

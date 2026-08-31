@@ -42,10 +42,10 @@ export const projects = [
   },
   {
     name: "Flowcus",
-    subtitle: "Engineering the conditions for deep focus.",
+    subtitle: "A full-stack productivity application that applies cognitive science principles to help users deliberately enter a focused flow state when they need to do demanding work.",
     stack: ["HTML", "CSS", "JavaScript", "Full Stack", "Cognitive Science"],
     description:
-      "Flowcus is a full-stack web application built with HTML, CSS, and JavaScript from scratch. It leverages cognitive science principles to help users deliberately enter a focused “flow” state for hyperproductivity in demanding work. This project explores how software can design an environment for human attention rather than just adding features, augmenting performance through structured engagement and environmental cues.",
+      "Engineering the conditions for deep focus.",
     details: {
       problem:
         "Modern productivity tools often focus on managing tasks rather than managing attention. I wanted to explore whether software could help users intentionally create the conditions for deep focus.",

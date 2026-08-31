@@ -42,15 +42,13 @@ export const projects = [
   },
   {
     name: "SpecCheck",
-    subtitle: "Engineering the conditions for deep focus.",
-    stack: ["HTML", "CSS", "JavaScript", "Full Stack", "Cognitive Science"],
+    subtitle: "AI Syllabus-Based Learning Tool",
+    stack: ["FlutterFlow", "Gemini API"],
     description:
-      "A full-stack productivity application that applies cognitive science principles to help users deliberately enter a focused flow state when they need to do demanding work.",
+      "An AI study tool that evaluates student knowledge: select an exam board, subject, and topic, write your understanding, and receive granular feedback against official specification standards.",
     bullets: [
-      "Designed and built a full-stack web application from scratch using HTML, CSS, and JavaScript.",
-      "Translated cognitive science principles into a structured user experience for deep focus.",
-      "Developed product logic, interface, interactions, and flow-state experience to augment human performance.",
-      "Focused on designing a system around human attention and environmental cues to reduce distractions and enhance task engagement.",
+      "Designed product flow independently; built the AI evaluation engine to pinpoint misconceptions, missing concepts, and factual errors",
+      "Developed and debugged cloud functions and Gemini API integrations to a deployment-ready state",
     ],
   },
   {
@@ -63,6 +61,23 @@ export const projects = [
       "Implemented a 25-question lifestyle questionnaire, scoring system, and recommendation engine",
       "Built core application logic and delivered a live demo to hackathon judges",
     ],
+  },
+  {
+    name: "Flowcus",
+    subtitle: "Engineering the conditions for deep focus.",
+    stack: ["HTML", "CSS", "JavaScript", "Full Stack", "Cognitive Science"],
+    description:
+      "A full-stack productivity application that applies cognitive science principles to help users deliberately enter a focused flow state when they need to do demanding work.",
+    details: {
+      problem:
+        "Modern productivity tools often focus on managing tasks rather than managing attention. I wanted to explore whether software could help users intentionally create the conditions for deep focus.",
+      approach:
+        "Flowcus translates principles from cognitive science and human performance into a structured experience designed to reduce distractions, establish attention cues, and progressively engage the user with their task.",
+      built:
+        "I built the full-stack application using HTML, CSS, and JavaScript, including the underlying product logic, interface, interactions, and flow-state experience.",
+      why_it_matters:
+        "Technology should expand what humans are capable of doing, not simply automate humans out of the process.",
+    },
   },
 ];
 
@@ -178,5 +193,5 @@ export const stats = [
   { value: "2.3M+", label: "Total Likes" },
   { value: "65.1M+", label: "Total Views" },
   { value: "7+", label: "Years Debating" },
-  { value: "3", label: "Products Built" },
+  { value: "4", label: "Products Built" },
 ];

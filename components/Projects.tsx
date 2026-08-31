@@ -1,25 +1,17 @@
-"use client";
-
 import { useRef, useState, type MouseEvent, type ReactNode } from "react";
 import { projects } from "@/lib/data";
 import { ScrollReveal } from "@/components/ui/ScrollReveal";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { usePrefersReducedMotion } from "@/hooks/usePrefersReducedMotion";
-import { ProjectDetailDialog } from "@/components/ui/ProjectDetailDialog";
-import { SpecCheckDetail } from "@/components/projects/SpecCheckDetail";
+import { FlowcusDetail } from "./projects/FlowcusDetail";
 
 export function Projects() {
-  const [isDetailOpen, setIsDetailOpen] = useState(false);
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+  const [isDetailOpen, setIsDetailOpen] = useState(false);
 
-  const openDetail = (project: Project) => {
+  const handleProjectClick = (project: Project) => {
     setSelectedProject(project);
     setIsDetailOpen(true);
-  };
-
-  const closeDetail = () => {
-    setIsDetailOpen(false);
-    setSelectedProject(null);
   };
 
   return (
@@ -39,17 +31,19 @@ export function Projects() {
               key={project.name}
               project={project}
               index={index}
-              onClick={() => openDetail(project)}
+              onClick={() => handleProjectClick(project)}
             />
           ))}
         </div>
-      </div>
 
-      {selectedProject && selectedProject.name === "SpecCheck" && (
-        <ProjectDetailDialog isOpen={isDetailOpen} onClose={closeDetail}>
-          <SpecCheckDetail />
-        </ProjectDetailDialog>
-      )}
+        {selectedProject && selectedProject.name === "Flowcus" && (
+          <FlowcusDetail
+            project={selectedProject}
+            open={isDetailOpen}
+            onOpenChange={setIsDetailOpen}
+          />
+        )}
+      </div>
     </section>
   );
 }
@@ -89,11 +83,11 @@ function ProjectCard({
     <ScrollReveal delay={index * 80}>
       <article
         ref={cardRef}
-        onClick={onClick} // Add onClick handler here
         onMouseEnter={() => setHover(true)}
         onMouseMove={handleMouseMove}
         onMouseLeave={handleMouseLeave}
-        className={`group relative rounded-xl border border-divider bg-surface-elevated overflow-hidden transition-all duration-500 ease-spring cursor-pointer ${
+        onClick={onClick}
+        className={`group relative rounded-xl border border-divider bg-surface-elevated overflow-hidden transition-all duration-500 ease-spring ${
           hover ? "shadow-card-hover border-ink/10" : "shadow-card"
         }`}
         style={{
@@ -128,19 +122,19 @@ function ProjectCard({
             </h3>
             <p className="text-[15px] text-ink-muted mb-6">{project.subtitle}</p>
 
-            <p className="body-text mb-6">{project.description}</p>
-
-            <ul className="space-y-3 mb-8">
-              {project.bullets.map((bullet) => (
-                <li
-                  key={bullet}
-                  className="flex gap-3 text-[14px] sm:text-[15px] text-ink-muted leading-relaxed"
-                >
-                  <span className="mt-2 w-1 h-1 rounded-full bg-accent flex-shrink-0" />
-                  <span>{bullet}</span>
-                </li>
-              ))}
-            </ul>
+            {project.bullets && project.bullets.length > 0 && (
+              <ul className="space-y-3 mb-8">
+                {project.bullets.map((bullet) => (
+                  <li
+                    key={bullet}
+                    className="flex gap-3 text-[14px] sm:text-[15px] text-ink-muted leading-relaxed"
+                  >
+                    <span className="mt-2 w-1 h-1 rounded-full bg-accent flex-shrink-0" />
+                    <span>{bullet}</span>
+                  </li>
+                ))}
+              </ul>
+            )}
 
             <div className="flex flex-wrap gap-2">
               {project.stack.map((tech) => (
@@ -172,7 +166,7 @@ function ProjectCard({
 
 function ProjectVisual({ name, hover }: { name: string; hover: boolean }) {
   const visuals: Record<string, ReactNode> = {
-    Forfeit: (
+    Stakes: (
       <div className="absolute inset-0 flex items-center justify-center p-8 sm:p-12">
         <div
           className={`relative w-[180px] sm:w-[220px] aspect-[9/19] rounded-[28px] border-2 border-ink/10 bg-surface-elevated shadow-elevated transition-transform duration-700 ease-spring ${
@@ -199,21 +193,23 @@ function ProjectVisual({ name, hover }: { name: string; hover: boolean }) {
     SpecCheck: (
       <div className="absolute inset-0 flex items-center justify-center p-8 sm:p-12">
         <div
-          className={`w-full max-w-[300px] aspect-[16/9] rounded-lg border border-divider bg-surface-elevated shadow-card transition-transform duration-700 ease-spring ${
+          className={`w-full max-w-[300px] transition-transform duration-700 ease-spring ${
             hover ? "scale-[1.02]" : "scale-100"
           }`}
         >
-          <div className="flex items-center gap-2 p-3 border-b border-divider">
-            <div className="w-2 h-2 rounded-full bg-red-500" />
-            <div className="w-2 h-2 rounded-full bg-yellow-500" />
-            <div className="w-2 h-2 rounded-full bg-green-500" />
-            <div className="flex-1 h-2 rounded-full bg-divider mx-2" />
-          </div>
-          <div className="p-4 space-y-3">
-            <div className="h-4 w-3/4 rounded bg-divider" />
-            <div className="h-3 w-full rounded bg-divider" />
-            <div className="h-3 w-full rounded bg-divider" />
-            <div className="h-3 w-1/2 rounded bg-divider" />
+          <div className="rounded-lg border border-divider bg-surface-elevated p-5 shadow-card">
+            <div className="flex items-center gap-2 mb-4">
+              <div className="w-2 h-2 rounded-full bg-accent" />
+              <div className="h-2 w-24 rounded bg-divider" />
+            </div>
+            <div className="h-20 rounded-md bg-surface border border-divider p-3 mb-3">
+              <div className="h-2 w-full rounded bg-divider mb-2" />
+              <div className="h-2 w-5/6 rounded bg-divider" />
+            </div>
+            <div className="rounded-md border border-accent/20 bg-accent/5 p-3">
+              <div className="h-2 w-16 rounded bg-accent/30 mb-2" />
+              <div className="h-2 w-full rounded bg-accent/15" />
+            </div>
           </div>
         </div>
       </div>
@@ -234,6 +230,38 @@ function ProjectVisual({ name, hover }: { name: string; hover: boolean }) {
               <div className="h-1.5 w-8 rounded bg-divider" />
             </div>
           ))}
+        </div>
+      </div>
+    ),
+    Flowcus: (
+      <div className="absolute inset-0 flex items-center justify-center p-8 sm:p-12">
+        <div
+          className={`w-full max-w-[380px] transition-transform duration-700 ease-spring ${
+            hover ? "scale-[1.02]" : "scale-100"
+          }`}
+        >
+          <div className="rounded-t-lg bg-surface-elevated flex items-center justify-between px-4 py-2 border-x border-t border-divider">
+            <div className="flex gap-1.5">
+              <div className="w-2.5 h-2.5 rounded-full bg-red-500" />
+              <div className="w-2.5 h-2.5 rounded-full bg-yellow-500" />
+              <div className="w-2.5 h-2.5 rounded-full bg-green-500" />
+            </div>
+            <div className="flex-1 text-center text-xs text-ink-muted">
+              Flowcus.app
+            </div>
+            <div className="w-8" /> {/* Placeholder for alignment */}
+          </div>
+          <div className="rounded-b-lg border border-divider bg-surface p-5 shadow-card">
+            <div className="flex justify-between items-center mb-4">
+              <div className="h-4 w-24 rounded bg-accent" />
+              <div className="h-3 w-16 rounded bg-divider" />
+            </div>
+            <div className="h-32 bg-surface-elevated rounded-md border border-divider mb-3" />
+            <div className="grid grid-cols-2 gap-2">
+              <div className="h-16 bg-surface-elevated rounded-md border border-divider" />
+              <div className="h-16 bg-surface-elevated rounded-md border border-divider" />
+            </div>
+          </div>
         </div>
       </div>
     ),

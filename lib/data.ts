@@ -42,13 +42,15 @@ export const projects = [
   },
   {
     name: "SpecCheck",
-    subtitle: "AI Syllabus-Based Learning Tool",
-    stack: ["FlutterFlow", "Gemini API"],
+    subtitle: "Engineering the conditions for deep focus.",
+    stack: ["HTML", "CSS", "JavaScript", "Full Stack", "Cognitive Science"],
     description:
-      "An AI study tool that evaluates student knowledge: select an exam board, subject, and topic, write your understanding, and receive granular feedback against official specification standards.",
+      "A full-stack productivity application that applies cognitive science principles to help users deliberately enter a focused flow state when they need to do demanding work.",
     bullets: [
-      "Designed product flow independently; built the AI evaluation engine to pinpoint misconceptions, missing concepts, and factual errors",
-      "Developed and debugged cloud functions and Gemini API integrations to a deployment-ready state",
+      "Designed and built a full-stack web application from scratch using HTML, CSS, and JavaScript.",
+      "Translated cognitive science principles into a structured user experience for deep focus.",
+      "Developed product logic, interface, interactions, and flow-state experience to augment human performance.",
+      "Focused on designing a system around human attention and environmental cues to reduce distractions and enhance task engagement.",
     ],
   },
   {
